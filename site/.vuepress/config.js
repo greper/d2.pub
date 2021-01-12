@@ -12,36 +12,99 @@ module.exports = {
     }
   },
   head: [
-    ['link', { rel: 'icon', href: `/logo.png` }],
+    ['link', { rel: 'icon', href: 'https://cdn.d2.pub/files/image-hosting/20200215125724.png' }],
     ['script', {}, 'var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?a4d73e21496377fe9f2ddb6b8c97440e";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();']
   ],
   themeConfig: {
+    // logo
+    logo: 'https://cdn.d2.pub/files/image-hosting/20200216220856.png',
+    // 仓库主页
+    repo: 'https://github.com/d2-projects',
+    // 自定义仓库链接文字
+    repoLabel: 'Github',
+    // 假如你的文档仓库和项目本身不在一个仓库
+    docsRepo: 'd2-projects/d2-pub',
+    // 假如文档不是放在仓库的根目录下
+    docsDir: 'site',
+    // 默认是 false, 设置为 true 来启用
+    editLinks: true,
     // 多国语言
     locales: {
       '/': {
+        editLinkText: 'Edit this page',
+        lastUpdated: 'lastUpdated',
         selectText: 'Languages',
         label: 'English',
         nav: [
           {
             text: 'Document',
             items: [
-              { text: 'd2-admin', link: '/zh/doc/d2-admin/' },
-              { text: 'd2-crud v2.x', link: '/zh/doc/d2-crud-v2/' },
-              { text: 'd2-crud v1.x', link: '/zh/doc/d2-crud-v1/' }
+              {
+                text: 'Scaffold',
+                items: [
+                  { text: 'D2 Admin', link: '/zh/doc/d2-admin/' }
+                ]
+              },
+              {
+                text: 'Component',
+                items: [
+                  { text: 'D2 CRUD', link: '/zh/doc/d2-crud-v2/' }
+                ]
+              },
+              {
+                text: 'Open source adaptable',
+                items: [
+                  { text: 'D2 Admin xiya go cms', link: '/zh/doc/d2-admin-xiya-go-cms/' },
+                  { text: 'D2 Advance', link: '/zh/doc/d2-advance/' }
+                ]
+              },
+              {
+                text: 'Other',
+                items: [
+                  { text: 'Iconfont Desktop', link: '/zh/doc/iconfont-desktop/' },
+                  { text: 'Folder Explorer', link: '/zh/doc/folder-explorer/' },
+                  { text: 'Storybook Vue', link: '/zh/doc/storybook-vue/' }
+                ]
+              }
             ]
           }
         ]
       },
       '/zh/': {
+        editLinkText: '帮助我们改善此页面',
+        lastUpdated: '上一次修改于',
         selectText: '语言',
         label: '简体中文',
         nav: [
           {
-            text: '项目文档',
+            text: '文档',
             items: [
-              { text: 'd2-admin', link: '/zh/doc/d2-admin/' },
-              { text: 'd2-crud v2.x', link: '/zh/doc/d2-crud-v2/' },
-              { text: 'd2-crud v1.x', link: '/zh/doc/d2-crud-v1/' }
+              {
+                text: '脚手架',
+                items: [
+                  { text: 'D2 Admin', link: '/zh/doc/d2-admin/' }
+                ]
+              },
+              {
+                text: '组件',
+                items: [
+                  { text: 'D2 CRUD', link: '/zh/doc/d2-crud-v2/' }
+                ]
+              },
+              {
+                text: '开源适配',
+                items: [
+                  { text: 'D2 Admin xiya go cms', link: '/zh/doc/d2-admin-xiya-go-cms/' },
+                  { text: 'D2 Advance', link: '/zh/doc/d2-advance/' }
+                ]
+              },
+              {
+                text: '其它项目',
+                items: [
+                  { text: 'Folder Explorer', link: '/zh/doc/folder-explorer/' },
+                  { text: 'Storybook Vue', link: '/zh/doc/storybook-vue/' }
+                ]
+              }
             ]
           }
         ],
@@ -57,7 +120,7 @@ module.exports = {
             },
             {
               title: '插件',
-              children: [ 'plugin/data-export', 'plugin/data-import', 'plugin/filters-dayjs', 'plugin/i18n', 'plugin/mock', 'plugin/error', 'plugin/log', 'plugin/console' ]
+              children: [ 'plugin/data-export', 'plugin/data-import', 'plugin/i18n', 'plugin/error', 'plugin/log', 'plugin/console' ]
             },
             {
               title: 'vuex',
@@ -97,6 +160,18 @@ module.exports = {
             },
             'events',
             'slots'
+          ],
+          '/zh/doc/d2-admin-xiya-go-cms/': [
+            ''
+          ],
+          '/zh/doc/folder-explorer/': [
+            ''
+          ],
+          '/zh/doc/storybook-vue/': [
+            ''
+          ],
+          '/zh/doc/d2-advance/': [
+            ''
           ]
         }
       }

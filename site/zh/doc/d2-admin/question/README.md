@@ -2,11 +2,31 @@
 
 本章总结收到的用户反馈问题，集中展示，方便后续用户自助解决问题
 
+## 如何新增一个主题
+
+新增主题所需的图片文件
+
+* `public/image/theme/your-theme-name/logo/all.png`
+* `public/image/theme/your-theme-name/logo/icon-only.png`
+* `public/image/theme/your-theme-name/preview@2x.png`
+
+新增主题样式文件
+
+* `src/assets/style/theme/your-theme-name/index.scss`
+* `src/assets/style/theme/your-theme-name/setting.scss`
+
+修改以下文件来注册新的主题
+
+* `src/assets/style/theme/register.scss`
+* `src/setting.js`
+
+示例请参考本次提交：[e3fd543](https://github.com/d2-projects/d2-admin/commit/e3fd543573d42f2f06c0214d34dea6263f8c3294)
+
 ## 代码下载慢
 
 建议使用 [Free Download Manager](http://www.freedownloadmanager.org/download.htm) 下载，速度会有显著提升
 
-![](https://qiniucdn.fairyever.com/20180722210734.png?imageMogr2/auto-orient/thumbnail/1480x/blur/1x0/quality/100|imageslim)
+![](https://cdn.d2.pub/files/image-hosting/20180722210734.png?imageMogr2/auto-orient/thumbnail/1480x/blur/1x0/quality/100|imageslim)
 
 ## 无法启动项目
 
@@ -90,7 +110,7 @@ node -p "[process.platform, process.arch, process.versions.modules].join('-')"
 
 [github https://github.com/sass/node-sass/releases](https://github.com/sass/node-sass/releases)
 
-下载完保存到任意位置，最好放置到 package.json 所在位置。然后我们需要手动指定 node-sass 二进制文件的下载源为下载的那个文件，以下是npm与yanr的指令：
+下载完保存到任意位置，最好放置到 package.json 所在位置。然后我们需要手动指定 node-sass 二进制文件的下载源为下载的那个文件，以下是npm与yarn的指令：
 
 npm
 
@@ -144,9 +164,9 @@ yarn
 yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass
 ```
 
-## 关闭 ESLint
+## 关闭 ESLint 👎
 
-由于使用者技术水平参差不齐，有些朋友希望在开发时关闭 ESLint，虽然我不建议这样做，在这里也给出以下方法，或者你也可以在下面的链接里找到答案
+由于使用者技术水平参差不齐，有些开发者希望在开发时关闭 ESLint，虽然我不建议这样做，在这里也给出以下方法，或者你也可以在下面的链接里找到答案
 
 [ESLint 中文](http://eslint.cn/) | [ESLint 英文](https://eslint.org/)
 
@@ -236,54 +256,6 @@ Cookies.set('uuid', res.uuid, setting)
 D2Admin 会在很多地方使用 cookie 中的此字段区分用户，比如不同用户选择的不同主题的数据持久化，还有不同用户打开的多标签页数据的持久化存储。
 :::
 
-## 异步请求无法携带 cookie
-
-请先确认您已经给 axios 设置了 `axios.defaults.withCredentials = true`：
-
-::: tip
-一般您应该在 src/plugin/axios/index.js 文件中设置 axios。
-:::
-
-较新的 D2Admin：
-
-``` js {4}
-const service = axios.create({
-  baseURL: process.env.VUE_APP_API,
-  timeout: 5000, // 请求超时时间
-  withCredentials: true
-})
-```
-
-或者在较老的 D2Admin 版本 axios 配置文件中添加高亮部分：
-
-``` js {3}
-import axios from 'axios'
-
-axios.defaults.withCredentials = true
-
-axios.interceptors.response.use(res => {
-  return res.data
-}, err => {
-  return Promise.reject(err)
-})
-
-export default {
-  install (Vue, options) {
-    Vue.prototype.$axios = axios
-  }
-}
-```
-
-通常这样您已经可以在发送异步请求的时候携带 cookie，但是在 D2 中很可能不行，您还需要禁用掉 mock.js，通常在 main.js 中，请注释掉相关引用代码，并保证 mock.js 没有在项目中其它任何地方被引用。
-
-::: tip 为什么这样做
-只要调用过 mock.js 的 mock 方法，他就会劫持 window 的 XMLHttpRequest 对象，用一个自己的 XHR 替换，那里面withCredentials 是 false 的，所以无法携带 cookie。
-:::
-
-::: tip 补充
-此问题在 [版本 1.5.3](https://github.com/d2-projects/d2-admin/releases/tag/1.5.3) 已经提供解决方案。
-:::
-
 ## 删除页面右上角 github 链接
 
 在 `src/components/demo/d2-demo-page-cover/index.vue` 中删除相关代码即可
@@ -312,7 +284,7 @@ npm ERR!     C:\Users\ZHZ\AppData\Roaming\npm-cache\_logs\2018-07-27T13_13_56_69
 
 解决方法
 
-目前只有一位朋友遇到这个问题，最后使用 cnpm 绕过了这个错误
+目前只有一位开发者遇到这个问题，最后使用 cnpm 绕过了这个错误
 
 ```
 npm install -g cnpm --registry=https://registry.npm.taobao.org
@@ -334,7 +306,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 如果您不清楚如何操作，建议您使用 [browsersync](http://www.browsersync.cn/) 快速达到目的。
 
-![](https://qiniucdn.fairyever.com/20180821144014.png?imageMogr2/auto-orient/thumbnail/1480x/blur/1x0/quality/100|imageslim)
+![](https://cdn.d2.pub/files/image-hosting/20180821144014.png?imageMogr2/auto-orient/thumbnail/1480x/blur/1x0/quality/100|imageslim)
 
 ## 灰度模式下弹出框被遮住
 
@@ -348,7 +320,7 @@ D2Admin 不是一个独立的库，不能像其它插件一样通过 npm 升级�
 
 iview-admin 作者在一次线下活动中也回答了现场观众的类似问题：
 
-> **“这类项目一旦下载开始使用，基本是无法更新的。你在哪个时间点开始使用，这个项目就固定在什么版本了。”**
+> “这类项目一旦下载开始使用，基本是无法更新的。你在哪个时间点开始使用，这个项目就固定在什么版本了。”
 
 那么可能您 follow 了我，或者 watch 了这个项目，看到我们经常更新代码，发布新的版本，也希望跟随一起更新，那怎么办呢？真的没有办法吗？
 
